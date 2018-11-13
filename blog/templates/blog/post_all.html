@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% block title %}장고 게시판 목록{% endblock %}
+{% load staticfiles %}
+{% block extrastyle %}{% static "css/tabular.css" %}{% endblock %}
+{% block content %}
+    <div id="content">
+        <h1 class="centered">블로그 목록 (표 형식)</h1>
+        <table id="tbl" >
+            <tr>
+                <th>번호</th>
+                <th>최종 수정일</th>
+                <th>제목</th>
+                <th>슬러그</th>
+                <th>요약</th>
+            </tr>
+            {% for post in posts %}
+            <tr>
+                <td>{{ post.id }}</td>
+                <td>{{ post.modify_date|date:"Y년 m월 d일" }}</td>
+                <td><a href='{{ post.get_absolute_url }}'>{{ post.title }}</a></td>
+                <td>{{ post.slug }}</td>
+                <td>{{ post.description }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        <br/>
+        <!--이전/현재/다음 페이지 이동 -->
+        <div class="centered"> <!--div 요소는 블록 요소-->
+            <span>  <!--span 요소는 인라인 요소-->
+                <!--page_obj는 장고 Page 객체가 들어있는 컨텍스트 변수이며
+                has_previous, has_next, previous_page_number, next_page_number,
+                number, pagenator.num_pages 속성을 가짐-->
+                {% if page_obj.has_previous %}
+                    <!--링크 형식 ?page=1에 주목-->
+                    <a href="?page={{ page_obj.previous_page_number }}">이전 페이지</a>
+                {% else  %}
+                    첫 페이지  &nbsp;
+                {% endif %}
+                &nbsp;&nbsp;(
+                {{ page_obj.number }} / {{ page_obj.paginator.num_pages }}
+                )&nbsp;&nbsp;
+
+                {% if page_obj.has_next %} &nbsp;
+                    <!--링크 형식 ?page=3에 주목-->
+                    <a href="?page={{ page_obj.next_page_number }}">다음 페이지</a>
+                {% else  %} &nbsp;
+                    끝 페이지
+                {% endif %}
+            </span>
+        </div>
+    </div>
+{% endblock %}
+
+
