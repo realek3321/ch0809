@@ -16,7 +16,7 @@
 
 <div id="header">                   <!--헤더 영역-->
     <h2 class="maintitle">쉽고 빠른 장고 웹 프로그래밍</h2>
-    <h4 class="welcome">반갑습니다. <a href="#">logistex</a>님.  /
+    <h4 class="welcome">반갑습니다. <a href="#">한 은경</a>님.  /
                 <a href="#">비밀번호 변경</a> /
                 <a href="#">로그아웃</a>
     </h4>
@@ -44,7 +44,7 @@
     </li>
 
     <li><a href="{% url 'blog:post_archive' %}">저장소</a></li>
-    <li><a href="#">검색</a></li>
+     <li><a href="{% url 'blog:search' %}">검색</a></li>     <!--ch09 수정 1/1-->
     <li><a href="{% url 'admin:index' %}">관리자</a></li>
 </div>
 
